@@ -1,0 +1,41 @@
+set tabstop=4
+set shiftwidth=4
+" Replace tab with spaces
+set expandtab
+" Remove 4 spaces when possible
+set softtabstop=4
+" Add number line
+set number
+set ic
+" activate syntax highlighting
+syntax on
+" Auto indentation
+set autoindent
+" Set a visual help for which line is selected
+set cursorline
+" Activate the menu at the bottom of the interface (used for file name display)
+set wildmenu
+" Always working backspace
+set backspace=indent,eol,start
+" Name of the file in the editor
+set laststatus=2
+set statusline+=%F
+" Activate mouse support
+set mouse=a
+
+"External packages
+packadd! onedark.vim
+
+" Color theme
+colorscheme onedark
+let g:lightline = {
+    \ 'colorscheme': 'onedark',
+    \ }
+
+" ALE settings
+" Activate auto-completion
+let g:ale_completion_enabled = 1
+" Sign gutter always open
+let g:ale_sign_column_always = 1
+" Display error in status bar
+let g:airline#extensions#ale#enabled = 1
