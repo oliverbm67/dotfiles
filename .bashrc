@@ -12,17 +12,18 @@ then
 fi
 export PATH
 
-# Uncomment the following line if you don't like systemctl's auto-paging feature:
-# export SYSTEMD_PAGER=
-
-## Add colors in the terminal
-if [ -f ~/dotfiles/prompt_colors.sh ]; then
-    source ~/dotfiles/prompt_colors.sh
-fi
-
-## Add all the aliases
-if [ -f ~/dotfiles/.bash_aliases ]; then
-    source ~/dotfiles/.bash_aliases
+## Make sure to be in interactive shell and not login
+if [[ $- == *i* ]]
+then
+    ## Add colors in the terminal
+    if [ -f ~/dotfiles/prompt_colors.sh ]; then
+        source ~/dotfiles/prompt_colors.sh
+    fi
+    
+    ## Add all the aliases
+    if [ -f ~/dotfiles/.bash_aliases ]; then
+        source ~/dotfiles/.bash_aliases
+    fi
 fi
 
 # enable programmable completion features (you don't need to enable
