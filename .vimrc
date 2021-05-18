@@ -6,7 +6,12 @@ set expandtab
 set softtabstop=4
 " Add number line
 set number
+" Ignore case for search
 set ic
+" search with upper case are case sensitive
+set smartcase
+" Search highlighting
+set hlsearch
 " activate syntax highlighting
 syntax on
 " Auto indentation
