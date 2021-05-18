@@ -44,3 +44,5 @@ let g:ale_completion_enabled = 1
 let g:ale_sign_column_always = 1
 " Display error in status bar
 let g:airline#extensions#ale#enabled = 1
+" Use vhdl 93 when linting VHDL code
+let g:ale_vhdl_ghdl_options = '--std=93'
