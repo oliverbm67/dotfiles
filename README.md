@@ -4,6 +4,12 @@ Retrieve and install these dotfiles with
     git clone https://github.com/oliverbm67/dotfiles.git ~/dotfiles
     cd ~/dotfiles
     ./install.sh
+# Vim plugin #
+Launch vim and execute the command
+
+    :PlugInstall
+
+to install all the plugins
 
 # Bugs and workarounds #
 ## The triangle is not displayed in the terminal ##
