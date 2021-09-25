@@ -1,8 +1,10 @@
-## Go to the home folder, remove the original dotfiles and link the new ones
+## Go to the home folder
 cd $HOME
-rm .bashrc
+## Source the installed bashrc at the end of the original bashrc
+echo "source ~/dotfiles/.bashrc" >> ~/.bashrc
+
+## For VIM, remove existing configuration and install new one
 rm .vimrc
-ln -s dotfiles/.bashrc ./.bashrc
 ln -s dotfiles/.vimrc ./.vimrc
 
 # Vim plug
