@@ -1,0 +1,23 @@
+-- TOP module
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity top is
+    generic(
+        size_g                  : natural         := 32                         -- data size
+    );
+    port(
+        clk                     : in  std_logic;                                -- system clock
+        rst_n                   : in  std_logic;                                -- system reset, active low
+        in_vec                  : in  std_logic_vector(size_g - 1 downto 0);    -- input vector
+        out_vec                 : out std_logic_vector(size_g - 1 downto 0)     -- output vector
+    );
+end top;
+
+architecture rtl of top is
+
+begin
+
+end rtl;

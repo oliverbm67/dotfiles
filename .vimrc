@@ -83,3 +83,7 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Snippets
+nnoremap ,vhdlmodule :-1read $HOME/dotfiles/snippets/vhdl.module<CR>6jw
+nnoremap ,vhdlproc :-1read $HOME/dotfiles/snippets/vhdl.process<CR>2j$
