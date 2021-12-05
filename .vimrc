@@ -65,7 +65,6 @@ let g:lightline = {
 " disable the banner
 let g:netrw_banner = 0
 " open in prior  window
-let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 " ALE settings
