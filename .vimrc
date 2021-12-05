@@ -61,6 +61,13 @@ let g:lightline = {
     \ 'colorscheme': 'onedark',
     \ }
 
+" Allow gf to open non-existent files
+map gf :edit <cfile><cr>
+
+" Maintain cursor position when yank in visual mode
+vnoremap y myy`y
+vnoremap y myY`y
+
 " Netrw : file browsing
 " disable the banner
 let g:netrw_banner = 0
