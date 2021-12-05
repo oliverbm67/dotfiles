@@ -11,7 +11,10 @@ Plug 'itchyny/lightline.vim'
 " Initialize plugin system
 call plug#end()
 
-
+" avoid compatibility mode
+set nocompatible
+" enable plugin for netrw
+filetype plugin on
 " Standard VIM settings
 set tabstop=4
 set shiftwidth=4
@@ -35,6 +38,8 @@ set autoindent
 set cursorline
 " Activate the menu at the bottom of the interface (used for file name display)
 set wildmenu
+" Search down in subfolders for file opening
+set path+=**
 " Always working backspace
 set backspace=indent,eol,start
 " Name of the file in the editor
@@ -42,6 +47,10 @@ set laststatus=2
 set statusline+=%F
 " Activate mouse support
 set mouse=a
+
+" Call to ctags to create tags
+" Then use ^] to jump to definition
+command! MakeTags !ctags -R .
 
 "External packages
 packadd! onedark.vim
@@ -52,6 +61,13 @@ let g:lightline = {
     \ 'colorscheme': 'onedark',
     \ }
 
+" Netrw : file browsing
+" disable the banner
+let g:netrw_banner = 0
+" open in prior  window
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
 " ALE settings
 " Activate auto-completion
 let g:ale_completion_enabled = 1
