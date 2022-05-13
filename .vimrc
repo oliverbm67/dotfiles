@@ -8,6 +8,8 @@ Plug 'joshdick/onedark.vim'
 Plug 'dense-analysis/ale'
 " Lightline
 Plug 'itchyny/lightline.vim'
+" Pylint : a python linter
+Plug 'vim-scripts/pylint.vim'
 " Initialize plugin system
 call plug#end()
 
