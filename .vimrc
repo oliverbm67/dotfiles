@@ -68,14 +68,14 @@ map gf :edit <cfile><cr>
 
 " Maintain cursor position when yank in visual mode
 vnoremap y myy`y
-vnoremap y myY`y
+vnoremap y myy`y
 
 " Netrw : file browsing
 " disable the banner
 let g:netrw_banner = 0
 " open in prior  window
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
+"let g:netrw_altv = 1
+"let g:netrw_winsize = 25
 " ALE settings
 " Activate auto-completion
 let g:ale_completion_enabled = 1
