@@ -225,68 +225,17 @@ bash_prompt() {
 	local FONT_COLOR_3=$D_GRAY
 	local BACKGROUND_3=$WHITE
 	local TEXTEFFECT_3=$BOLD
+
+	local FONT_COLOR_4=$WHITE
+	local BACKGROUND_4=$RED
+	local TEXTEFFECT_4=$BOLD
 	
+	local FONT_COLOR_5=$WHITE
+	local BACKGROUND_5=$L_RED
+	local TEXTEFFECT_5=$BOLD
+
 	local PROMT_FORMAT=$BLUE_BOLD
 
-	
-	############################################################################
-	## EXAMPLE CONFIGURATIONS                                                 ##
-	## I use them for different hosts. Test them out ;)                       ##
-	############################################################################
-	
-	## CONFIGURATION: BLUE-WHITE
-	if [ "$HOSTNAME" = dell ]; then
-		FONT_COLOR_1=$WHITE; BACKGROUND_1=$BLUE; TEXTEFFECT_1=$BOLD
-		FONT_COLOR_2=$WHITE; BACKGROUND_2=$L_BLUE; TEXTEFFECT_2=$BOLD	
-		FONT_COLOR_3=$D_GRAY; BACKGROUND_3=$WHITE; TEXTEFFECT_3=$BOLD	
-		PROMT_FORMAT=$CYAN_BOLD
-	fi
-	
-	## CONFIGURATION: BLACK-RED
-	if [ "$HOSTNAME" = giraff6 ]; then
-		FONT_COLOR_1=$WHITE; BACKGROUND_1=$BLACK; TEXTEFFECT_1=$BOLD
-		FONT_COLOR_2=$WHITE; BACKGROUND_2=$D_GRAY; TEXTEFFECT_2=$BOLD
-		FONT_COLOR_3=$WHITE; BACKGROUND_3=$RED; TEXTEFFECT_3=$BOLD
-		PROMT_FORMAT=$RED_BOLD
-	fi
-	
-	## CONFIGURATION: RED-BLACK
-	#FONT_COLOR_1=$WHITE; BACKGROUND_1=$RED; TEXTEFFECT_1=$BOLD
-	#FONT_COLOR_2=$WHITE; BACKGROUND_2=$D_GRAY; TEXTEFFECT_2=$BOLD
-	#FONT_COLOR_3=$WHITE; BACKGROUND_3=$BLACK; TEXTEFFECT_3=$BOLD
-	#PROMT_FORMAT=$RED_BOLD
-
-	## CONFIGURATION: CYAN-BLUE
-	if [ "$HOSTNAME" = sharkoon ]; then
-		FONT_COLOR_1=$BLACK; BACKGROUND_1=$L_CYAN; TEXTEFFECT_1=$BOLD
-		FONT_COLOR_2=$WHITE; BACKGROUND_2=$L_BLUE; TEXTEFFECT_2=$BOLD
-		FONT_COLOR_3=$WHITE; BACKGROUND_3=$BLUE; TEXTEFFECT_3=$BOLD
-		PROMT_FORMAT=$CYAN_BOLD
-	fi
-	
-	## CONFIGURATION: GRAY-SCALE
-	if [ "$HOSTNAME" = giraff ]; then
-		FONT_COLOR_1=$WHITE; BACKGROUND_1=$BLACK; TEXTEFFECT_1=$BOLD
-		FONT_COLOR_2=$WHITE; BACKGROUND_2=$D_GRAY; TEXTEFFECT_2=$BOLD
-		FONT_COLOR_3=$WHITE; BACKGROUND_3=$L_GRAY; TEXTEFFECT_3=$BOLD
-		PROMT_FORMAT=$BLACK_BOLD
-	fi
-	
-	## CONFIGURATION: GRAY-CYAN
-	if [ "$HOSTNAME" = light ]; then
-		FONT_COLOR_1=$WHITE; BACKGROUND_1=$BLACK; TEXTEFFECT_1=$BOLD
-		FONT_COLOR_2=$WHITE; BACKGROUND_2=$D_GRAY; TEXTEFFECT_2=$BOLD
-		FONT_COLOR_3=$BLACK; BACKGROUND_3=$L_CYAN; TEXTEFFECT_3=$BOLD
-		PROMT_FORMAT=$CYAN_BOLD
-	fi
-	
-	
-	##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  
-	  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##
-	##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ##  ## 	
-
-	
-	
 	
 	############################################################################
 	## TEXT FORMATING                                                         ##
@@ -310,22 +259,29 @@ bash_prompt() {
 	BG4=$(($BACKGROUND_4+$BG))
 	FE4=$(($TEXTEFFECT_4+$EFFECT))
 	
+	FC5=$(($FONT_COLOR_5+$COLOR))
+	BG5=$(($BACKGROUND_5+$BG))
+	FE5=$(($TEXTEFFECT_5+$EFFECT))
 
 	## CALL FORMATING HELPER FUNCTION: effect + font color + BG color
 	local TEXT_FORMAT_1
 	local TEXT_FORMAT_2
 	local TEXT_FORMAT_3
-	local TEXT_FORMAT_4	
+	local TEXT_FORMAT_4
+	local TEXT_FORMAT_5
 	format_font TEXT_FORMAT_1 $FE1 $FC1 $BG1
 	format_font TEXT_FORMAT_2 $FE2 $FC2 $BG2
 	format_font TEXT_FORMAT_3 $FC3 $FE3 $BG3
 	format_font TEXT_FORMAT_4 $FC4 $FE4 $BG4
+	format_font TEXT_FORMAT_5 $FC5 $FE5 $BG5
 	
 	
 	# GENERATE PROMT SECTIONS
 	local PROMT_USER=$"$TEXT_FORMAT_1 \u "
 	local PROMT_HOST=$"$TEXT_FORMAT_2 \h "
 	local PROMT_PWD=$"$TEXT_FORMAT_3 \${NEW_PWD} "
+    local PROMT_GIT=$"$TEXT_FORMAT_4 $1 "
+    local PROMT_PY_VENV=$"$TEXT_FORMAT_5 $2 "
 	local PROMT_INPUT=$"$PROMT_FORMAT "
 
 
@@ -343,16 +299,25 @@ bash_prompt() {
 	TSBG2=$(($BACKGROUND_3+$BG))
 	
 	TSFC3=$(($BACKGROUND_3+$COLOR))
-	TSBG3=$(($DEFAULT+$BG))
+	TSBG3=$(($BACKGROUND_4+$BG))
 	
+	TSFC4=$(($BACKGROUND_4+$COLOR))
+	TSBG4=$(($BACKGROUND_5+$BG))
+
+	TSFC5=$(($BACKGROUND_5+$COLOR))
+	TSBG5=$(($DEFAULT+$BG))
 
 	## CALL FORMATING HELPER FUNCTION: effect + font color + BG color
 	local SEPARATOR_FORMAT_1
 	local SEPARATOR_FORMAT_2
 	local SEPARATOR_FORMAT_3
+	local SEPARATOR_FORMAT_4
+	local SEPARATOR_FORMAT_5
 	format_font SEPARATOR_FORMAT_1 $TSFC1 $TSBG1
 	format_font SEPARATOR_FORMAT_2 $TSFC2 $TSBG2
 	format_font SEPARATOR_FORMAT_3 $TSFC3 $TSBG3
+	format_font SEPARATOR_FORMAT_4 $TSFC4 $TSBG4
+	format_font SEPARATOR_FORMAT_5 $TSFC5 $TSBG5
 	
 
 	# GENERATE SEPARATORS WITH FANCY TRIANGLE
@@ -360,6 +325,8 @@ bash_prompt() {
 	local SEPARATOR_1=$SEPARATOR_FORMAT_1$TRIANGLE
 	local SEPARATOR_2=$SEPARATOR_FORMAT_2$TRIANGLE
 	local SEPARATOR_3=$SEPARATOR_FORMAT_3$TRIANGLE
+	local SEPARATOR_4=$SEPARATOR_FORMAT_4$TRIANGLE
+	local SEPARATOR_5=$SEPARATOR_FORMAT_5$TRIANGLE
 
 
 
@@ -382,7 +349,7 @@ bash_prompt() {
 	## BASH PROMT                                                             ##
 	## Generate promt and remove format from the rest                         ##
 	############################################################################
-	PS1="$TITLEBAR\n${PROMT_USER}${SEPARATOR_1}${PROMT_HOST}${SEPARATOR_2}${PROMT_PWD}${SEPARATOR_3}${PROMT_INPUT}"
+	PS1="$TITLEBAR\n${PROMT_USER}${SEPARATOR_1}${PROMT_HOST}${SEPARATOR_2}${PROMT_PWD}${SEPARATOR_3}${PROMT_GIT}${SEPARATOR_4}${PROMT_PY_VENV}${SEPARATOR_5}${PROMT_INPUT}"
 
 	
 
@@ -407,10 +374,9 @@ PROMPT_COMMAND=bash_prompt_command
 ##	Call bash_promnt only once, then unset it (not needed any more)
 ##	It will set $PS1 with colors and relative to $NEW_PWD, 
 ##	which gets updated by $PROMT_COMMAND on behalf of the terminal
-bash_prompt
-unset bash_prompt
+#bash_prompt
+#unset bash_prompt
 
 
 
 ### EOF ###
-
