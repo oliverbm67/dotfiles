@@ -343,6 +343,18 @@ bash_prompt() {
 		;;
 	esac
 
+    ## Reset optinal variables if empty
+    if [[ -z "$1" ]]; then
+        PROMT_GIT=""
+        SEPARATOR_3=""
+    elif [ "$1" = " " ]; then
+        PROMT_GIT=""
+        SEPARATOR_3=""
+    fi
+    if [[ -z "$2" ]]; then
+        PROMT_PY_VENV=""
+        SEPARATOR_4=""
+    fi
 
 
 	############################################################################
