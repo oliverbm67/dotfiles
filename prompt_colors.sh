@@ -318,7 +318,6 @@ bash_prompt() {
 	format_font SEPARATOR_FORMAT_3 $TSFC3 $TSBG3
 	format_font SEPARATOR_FORMAT_4 $TSFC4 $TSBG4
 	format_font SEPARATOR_FORMAT_5 $TSFC5 $TSBG5
-	
 
 	# GENERATE SEPARATORS WITH FANCY TRIANGLE
 	local TRIANGLE=$'\uE0B0'	
@@ -328,7 +327,29 @@ bash_prompt() {
 	local SEPARATOR_4=$SEPARATOR_FORMAT_4$TRIANGLE
 	local SEPARATOR_5=$SEPARATOR_FORMAT_5$TRIANGLE
 
-
+	############################################################################
+	## OPTIONAL ELEMENT                                                       ##
+	## Cleanup of the 2 extra inputs if not used                              ##
+	############################################################################
+    
+    if [ -z "$1" ] && [ -z "$2"]; then
+        SEPARATOR_4=""
+        SEPARATOR_5=""
+        PROMT_PY_VENV=""
+        PROMT_GIT=""
+        format_font SEPARATOR_FORMAT_3 $TSFC3 $TSBG5
+	    SEPARATOR_3=$SEPARATOR_FORMAT_3$TRIANGLE
+    elif [[ -z "$2" ]]; then
+        PROMT_PY_VENV=""
+        SEPARATOR_5=""
+        format_font SEPARATOR_FORMAT_4 $TSFC4 $TSBG5
+	    SEPARATOR_4=$SEPARATOR_FORMAT_4$TRIANGLE
+    elif [[ -z "$1" ]]; then
+        PROMT_GIT=""
+        SEPARATOR_4=""
+        format_font SEPARATOR_FORMAT_3 $TSFC3 $TSBG4
+	    SEPARATOR_3=$SEPARATOR_FORMAT_3$TRIANGLE
+    fi
 
 	############################################################################
 	## WINDOW TITLE                                                           ##
@@ -342,20 +363,6 @@ bash_prompt() {
 		local TITLEBAR=""
 		;;
 	esac
-
-    ## Reset optinal variables if empty
-    if [[ -z "$1" ]]; then
-        PROMT_GIT=""
-        SEPARATOR_3=""
-    elif [ "$1" = " " ]; then
-        PROMT_GIT=""
-        SEPARATOR_3=""
-    fi
-    if [[ -z "$2" ]]; then
-        PROMT_PY_VENV=""
-        SEPARATOR_4=""
-    fi
-
 
 	############################################################################
 	## BASH PROMT                                                             ##
