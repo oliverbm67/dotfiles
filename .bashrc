@@ -16,11 +16,8 @@ export PATH
 if [[ $- == *i* ]]
 then
     ## Add a git prompt
-    if [ -f ~/dotfiles/git-prompt.sh ]; then
-        ## Activate staged and unstaged indicator
-        GIT_PS1_SHOWDIRTYSTATE=1
-        source ~/dotfiles/git-prompt.sh
-        PS1_GIT='$(__git_ps1)'
+    if [ -f ~/dotfiles/detect_git.py ]; then
+        PS1_GIT=$(python ~/dotfiles/detect_git.py 2>&1)
     else
         PS1_GIT=""
     fi
