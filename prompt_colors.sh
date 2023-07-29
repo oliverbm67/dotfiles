@@ -60,13 +60,6 @@
 ##		   part of $PS1 to be the window title)
 ##		6. Formating of the bash promt ($PS1).
 ##
-##	* Main script body:	
-##	  It calls the adequate helper functions to colorize your promt and sets
-##	  a hook to regenerate your working directory "NEW_PWD" when you change it.
-## 
-
-
-
 
 ################################################################################
 ##  FUNCTIONS                                                                 ##
@@ -376,26 +369,5 @@ bash_prompt() {
 	none="$(tput sgr0)"
 	trap 'echo -ne "${none}"' DEBUG
 }
-
-
-
-
-################################################################################
-##  MAIN                                                                      ##
-################################################################################
-
-##	Bash provides an environment variable called PROMPT_COMMAND. 
-##	The contents of this variable are executed as a regular Bash command 
-##	just before Bash displays a prompt. 
-##	We want it to call our own command to truncate PWD and store it in NEW_PWD
-#PROMPT_COMMAND=bash_prompt_command
-
-##	Call bash_promnt only once, then unset it (not needed any more)
-##	It will set $PS1 with colors and relative to $NEW_PWD, 
-##	which gets updated by $PROMT_COMMAND on behalf of the terminal
-#bash_prompt
-#unset bash_prompt
-
-
 
 ### EOF ###
