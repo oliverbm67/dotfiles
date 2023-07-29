@@ -388,7 +388,7 @@ bash_prompt() {
 ##	The contents of this variable are executed as a regular Bash command 
 ##	just before Bash displays a prompt. 
 ##	We want it to call our own command to truncate PWD and store it in NEW_PWD
-PROMPT_COMMAND=bash_prompt_command
+#PROMPT_COMMAND=bash_prompt_command
 
 ##	Call bash_promnt only once, then unset it (not needed any more)
 ##	It will set $PS1 with colors and relative to $NEW_PWD, 

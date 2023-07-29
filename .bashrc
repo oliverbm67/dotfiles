@@ -15,24 +15,30 @@ export PATH
 ## Make sure to be in interactive shell and not login
 if [[ $- == *i* ]]
 then
-    ## Add a git prompt
-    if [ -f ~/dotfiles/detect_git.py ]; then
-        PS1_GIT=$(python ~/dotfiles/detect_git.py 2>&1)
-    else
-        PS1_GIT=""
-    fi
-    ## Add a python venv prompt
-    if [ -f ~/dotfiles/detect_venv.py ]; then
-        PS1_PY_VENV=$(python ~/dotfiles/detect_venv.py 2>&1)
-    else
-        PS1_PY_VENV=""
-    fi
     ## Add colors in the terminal
     if [ -f ~/dotfiles/prompt_colors.sh ]; then
         source ~/dotfiles/prompt_colors.sh
-        bash_prompt $PS1_GIT $PS1_PY_VENV
     fi
     
+    function update_custom_prompt() {
+        ## Add a git prompt
+        if [ -f ~/dotfiles/detect_git.py ]; then
+            PS1_GIT="$(python ~/dotfiles/detect_git.py 2>&1)"
+        else
+            PS1_GIT=""
+        fi
+        ## Add a python venv prompt
+        if [ -f ~/dotfiles/detect_venv.py ]; then
+            PS1_PY_VENV=$(python ~/dotfiles/detect_venv.py 2>&1)
+        else
+            PS1_PY_VENV=""
+        fi
+        if [ -f ~/dotfiles/prompt_colors.sh ]; then
+            bash_prompt $PS1_GIT $PS1_PY_VENV
+            bash_prompt_command
+        fi
+    }
+    PROMPT_COMMAND=update_custom_prompt
     ## Add all the aliases
     if [ -f ~/dotfiles/.bash_aliases ]; then
         source ~/dotfiles/.bash_aliases
