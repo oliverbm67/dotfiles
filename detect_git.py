@@ -144,6 +144,7 @@ if rev_parse.returncode != 0:
     sys.exit()
 rev_parse_str = rev_parse.stdout.decode("utf-8").split("\n")
 ## Extract informations
+dotgit_dir = rev_parse_str[0]
 inside_gitdir = bool(rev_parse_str[1] == "true")
 bare_repo = bool(rev_parse_str[2] == "true")
 inside_worktree = bool(rev_parse_str[3] == "true")
@@ -151,7 +152,11 @@ short_sha = rev_parse_str[4]
 
 if inside_worktree and check_ignore_directory():
     sys.exit()
-dotgit = os.path.join(os.getcwd(), ".git")
+## Make sure the .git if an absolute path
+if dotgit_dir == ".git":
+    dotgit = os.path.join(os.getcwd(), ".git")
+else:
+    dotgit = dotgit_dir
 (repo_state,branch_name,rebase_step,total_step) = check_rebase(dotgit)
 if branch_name == "" :
     branch_name = check_branch(dotgit)
